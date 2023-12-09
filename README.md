@@ -5,6 +5,9 @@
     - [Simply Then](#simply-then)
 
 Some python general tools. 
+```
+pip install josiauhtools
+```
 
 # Examples
 Here's what you can do with JosiauhTools!
