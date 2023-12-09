@@ -4,7 +4,9 @@
 - [Examples](#examples)
     - [Simply Then](#simply-then)
 
-Some python general tools. 
+Some python general tools.
+
+[Unstabler version (NOT RECOMMENDED)](https://github.com/josiauh/josiauhtools/tree/unstabler)
 ```
 pip install josiauhtools
 ```
