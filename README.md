@@ -5,8 +5,12 @@
     - [Simply Then](#simply-then)
 
 Some python general tools. 
+
+**YOU'RE IN UNSTABLER!**
+
+You should only use this if you don't mind the breaking.
 ```
-pip install josiauhtools
+pip install git+https://github.com/josiauh/josiauhtools.git@unstabler
 ```
 
 # Examples
