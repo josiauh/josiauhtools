@@ -132,6 +132,12 @@ venv.bak/
 .spyderproject
 .spyproject
 
+# Venv
+Scripts
+Include
+share
+pyvenv.cfg
+
 # Rope project settings
 .ropeproject
 
