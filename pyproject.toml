@@ -16,5 +16,8 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
+dependencies = [
+  "yachalk"
+]
 [project.urls]
 Repository = "https://github.com/josiauh/josiauhtools"

@@ -128,6 +128,12 @@ ENV/
 env.bak/
 venv.bak/
 
+# Venv (they didn't include any here)
+share
+Scripts
+pyvenv.cfg
+Include
+
 # Spyder project settings
 .spyderproject
 .spyproject
