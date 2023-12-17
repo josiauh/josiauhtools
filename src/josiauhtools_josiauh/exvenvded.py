@@ -5,8 +5,13 @@ except ImportError: # pip < 10.0
 
 import venv
 import os
+import platform
+import yachalk
 
 def convertToVenv(path = "."):
+    if (os.path.isfile(os.path.join(path, "pyvenv.cfg"))):
+        print(yachalk.chalk.yellow_bright("Venv already exists. Nothing will happen."))
+        return
     print("""
     ╭── Status────────────────────╮
     ┃ 🕐 Freezing Packages...     ┃
@@ -37,7 +42,11 @@ def convertToVenv(path = "."):
     ┃ 📲 Installing packages...   ┃
     ╰─────────────────────────────╯ 
     """)
-    os.system((path + "\\Scripts\\activate" if os.name == "nt" else path + "/Scripts/activate") + "&&" + "python -m pip install -r "+path+"/pkgs.txt")
+    if platform.system() == "Windows":
+        os.system(path + "\\Scripts\\activate && pip install -r " + path + "\\pkgs.txt")
+    else:
+        # assuming bash and zsh
+        os.system("source " + path + "/bin/activate")
     print("""
     ╭── Status────────────────────╮
     ┃ 📦 Packages frozen!         ┃
@@ -47,4 +56,4 @@ def convertToVenv(path = "."):
     ┃ Converted to venv!          ┃
     ╰─────────────────────────────╯ 
     """)
-    print("If not already activated, run the activate file.")
+    print("If not already activated, run the activate file.\n\nFind out how at https://docs.python.org/3.9/library/venv.html")
