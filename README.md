@@ -42,3 +42,6 @@ def bar(p):
 
 synx.then(foo, bar)
 ```
+
+## More Examples
+You can find some in the [tests folder!](tests)
