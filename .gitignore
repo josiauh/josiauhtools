@@ -152,6 +152,9 @@ flagged
 .dmypy.json
 dmypy.json
 
+# Created by blast
+.blast
+
 # Pyre type checker
 .pyre/
 
