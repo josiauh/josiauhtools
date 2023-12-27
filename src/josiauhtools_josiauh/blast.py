@@ -36,8 +36,12 @@ class BlastApp:
         @app.page('/')
         def index():
             return 'this is the content of my index page. do you like it?'
+
+        @app.page('404')
+        def notFound():
+            return '<a href="/">Not found. Click to go home!</a>'
         ```
-        The page decorator also supports HTML content.
+        The page decorator supports HTML content, as seen in the "notFound" decorator.
         """
         def decorate(function):
             result = function()
@@ -52,7 +56,18 @@ class BlastApp:
         path: str
     ):
         """
-        Identifies a POST method. You cannot have a parameter POST function, although it will be added later in the future.
+        Identifies a function as a POST method. Example:
+        ```python
+        app = blast.BlastApp()
+        @app.post('/postTest')
+        def testPost():
+            return 'allow me.'
+
+        @app.post('404')
+        def weezer():
+            return 'bro just got weezer\\'d'
+        ```
+        You can't have a paramater POST method, which will be added in the future.
         """
         def decorate(function):
             result = function()
@@ -65,6 +80,10 @@ class BlastApp:
     def addAsset(self, assetPath: os.PathLike, webPath: str | None = None):
         """
         Adds an asset. This is not the same as adding a page, because every page stored in your app is automatically identified as an HTML file.
+        This can be:
+        * your favicon
+        * CSS stylesheets
+        * JS scripts
         """
         with open(assetPath, "r") as f:
             self.assets.append({"path": webPath, "content": f.read()})
@@ -109,7 +128,17 @@ class BlastApp:
                         file = """
                             <h1>404</h1>
                             This is Blast's default 404 page.<br>
-                            No worries! You can change it by adding the page decorator as 404.
+                            No worries! You can change it by adding a page as 404.<br>
+                            Example 1:<br>
+                            <code>
+                                @app.page('404')
+                                def iForgot():
+                                    return 'insert your content here'
+                            </code><br>
+                            Example 2:<br>
+                            <code>
+                                app.addPageFromFile("path/to/404.html", "404")
+                            </code><br>
                         """
                     self.send_response(404)
                     sentResp = True
@@ -130,6 +159,14 @@ class BlastApp:
                         self.end_headers()
                         self.wfile.write(bytes(i["function"](), "utf8"))
                         return
+                self.send_response(404)
+                self.send_header('Content-type','text/html')
+                self.end_headers()
+                for i in self.posts:
+                    if i["path"] == "404":
+                        self.wfile.write(bytes(i["function"](), "utf8"))
+                        return
+                self.wfile.write(bytes("This is Blast's default 404 message for POST methods.\nNo worries! You can change it by adding a POST method as '404'."))
         web = HTTPServer((self.host, self.port), Server)
         print("Blast app started! You can launch it at http://%s:%s." % (self.host, self.port))
         try:
