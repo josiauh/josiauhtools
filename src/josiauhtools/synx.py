@@ -1,16 +1,16 @@
 def then(first, thenDo):
     """
     Works like making a promise in javascript.
-    The first paramater is what to do first. 
+    The first parameter is what to do first. 
     This is turned into the second parameter as parameters for the function.
     """
     params = first()
     print(params)
-    thenDo(params)
+    thenDo(*params)
 
-class ArthimeticOperation():
+class ArithmeticOperation():
     """
-    A simple class for creating arthimetic operations.
+    A simple class for creating arithmetic operations.
     The operations supported right now:
         Addition: +
         Subtraction: -
@@ -45,6 +45,3 @@ class ArthimeticOperation():
             return int(self.__numseperate[0]) * int(self.__numseperate[1])
         else:
             raise Exception("Could not execute: unknown operation type.")
-        
-            
-            
